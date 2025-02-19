@@ -9,6 +9,22 @@
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
+        "C:/Users/Peter/Desktop/pyEscapeRoom/Graphics/tilemaps/bottomRoom.tmx": {
+            "scale": 1.6427083333333334,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 214.28027901077996,
+                "y": 240.15218769816107
+            }
+        },
+        "C:/Users/Peter/Desktop/pyEscapeRoom/Graphics/tilemaps/leftRoom.tmx": {
+            "scale": 1.4307459677419354,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 217.36912562530827,
+                "y": 220.51433805397028
+            }
+        },
         "C:/Users/Peter/Desktop/pyEscapeRoom/Graphics/tilemaps/mainRoom.tmx": {
             "scale": 1.4146739130434782,
             "selectedLayer": 0,
@@ -17,8 +33,24 @@
                 "y": 176.36573184786783
             }
         },
+        "C:/Users/Peter/Desktop/pyEscapeRoom/Graphics/tilemaps/rightRoom.tmx": {
+            "scale": 1.6427083333333334,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 210.62777425491439,
+                "y": 240.15218769816107
+            }
+        },
         "C:/Users/Peter/Desktop/pyEscapeRoom/Graphics/tilemaps/tileset.tsx": {
             "scaleInDock": 1
+        },
+        "C:/Users/Peter/Desktop/pyEscapeRoom/Graphics/tilemaps/topRoom.tmx": {
+            "scale": 1.6427083333333334,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 216.10653138871274,
+                "y": 240.15218769816107
+            }
         },
         "mainRoom.tmx": {
             "scale": 2.112053571428571,
@@ -29,24 +61,32 @@
             }
         },
         "tileset.tsx": {
-            "scaleInDock": 1,
+            "scaleInDock": 2,
             "scaleInEditor": 1
         }
     },
     "last.externalTilesetPath": "C:/Users/Peter/Desktop/pyEscapeRoom/Graphics/tilesets/mainRoom",
     "last.imagePath": "C:/Users/Peter/Desktop/RF_Catacombs_v1.0",
-    "map.height": 25,
+    "map.height": 30,
     "map.lastUsedFormat": "tmx",
     "map.tileHeight": 16,
     "map.tileWidth": 16,
-    "map.width": 25,
+    "map.width": 27,
     "openFiles": [
         "tileset.tsx",
-        "C:/Users/Peter/Desktop/pyEscapeRoom/Graphics/tilemaps/mainRoom.tmx"
+        "C:/Users/Peter/Desktop/pyEscapeRoom/Graphics/tilemaps/mainRoom.tmx",
+        "C:/Users/Peter/Desktop/pyEscapeRoom/Graphics/tilemaps/leftRoom.tmx",
+        "C:/Users/Peter/Desktop/pyEscapeRoom/Graphics/tilemaps/rightRoom.tmx",
+        "C:/Users/Peter/Desktop/pyEscapeRoom/Graphics/tilemaps/topRoom.tmx",
+        "C:/Users/Peter/Desktop/pyEscapeRoom/Graphics/tilemaps/bottomRoom.tmx"
     ],
     "project": "mainRoom.tiled-project",
     "recentFiles": [
         "tileset.tsx",
+        "C:/Users/Peter/Desktop/pyEscapeRoom/Graphics/tilemaps/bottomRoom.tmx",
+        "C:/Users/Peter/Desktop/pyEscapeRoom/Graphics/tilemaps/topRoom.tmx",
+        "C:/Users/Peter/Desktop/pyEscapeRoom/Graphics/tilemaps/rightRoom.tmx",
+        "C:/Users/Peter/Desktop/pyEscapeRoom/Graphics/tilemaps/leftRoom.tmx",
         "C:/Users/Peter/Desktop/pyEscapeRoom/Graphics/tilemaps/mainRoom.tmx",
         "mainRoom.tmx"
     ],
