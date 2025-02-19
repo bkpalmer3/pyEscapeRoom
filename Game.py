@@ -31,6 +31,9 @@ while True:
         if event.type == pygame.QUIT:
             pygame.quit()
             exit()
+        
+        # Wall tool for creation
+        if event.type == pygame.MOUSEMOTION: print(event.pos)
 
     # Draw the map
     for layer in tmx_data.visible_layers:
