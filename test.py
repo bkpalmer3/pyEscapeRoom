@@ -20,6 +20,7 @@ height = tmx_data.tileheight * tmx_data.height * ZOOM
 screen = pygame.display.set_mode((width, height))
 
 
+
 # Main loop
 while True:
     for event in pygame.event.get():
