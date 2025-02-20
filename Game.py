@@ -1,10 +1,11 @@
 # imports
 import pygame
 import pytmx
+from Player import Player
 from sys import exit
 
 # Constants
-SPEED = 3
+# SPEED = 3
 ZOOM = 2
 
 # Setup and display
@@ -21,8 +22,15 @@ height = tmx_data.tileheight * tmx_data.height * ZOOM
 screen = pygame.display.set_mode((width, height))
 
 # Surfaces and rectangles
-player_surf = pygame.transform.scale(pygame.image.load('graphics/Droop.png').convert_alpha(), (50,50))
-player_rect = player_surf.get_rect(center = (600, 300))
+player = pygame.sprite.GroupSingle()
+player.add(Player())
+# player_surf = pygame.transform.scale(pygame.image.load('graphics/Droop.png').convert_alpha(), (50,50))
+# player_rect = player_surf.get_rect(center = (330, 400))
+
+# Walls
+top_left_wall_surf = pygame.Surface((1,350))
+top_left_wall_rect = top_left_wall_surf.get_rect(bottomright = (95,350))
+
 
 # Game loop
 while True:
@@ -45,20 +53,28 @@ while True:
                     screen.blit(scaled_tile, (x * tmx_data.tilewidth * ZOOM, y * tmx_data.tileheight * ZOOM))
 
     # Surfaces
-    screen.blit(player_surf,player_rect)
+    # screen.blit(player_surf,player_rect)
+    # pygame.draw.rect(screen,'Red', top_left_wall_rect)
 
-    # Arrow key imputs
-    keys = pygame.key.get_pressed()
+    # Player
+    player.draw(screen)
+    player.update()
 
-    if keys[pygame.K_UP]:
-        player_rect.y -= SPEED 
-    if keys[pygame.K_DOWN]:
-        player_rect.y += SPEED
-    if keys[pygame.K_RIGHT]:
-        player_rect.x += SPEED
-    if keys[pygame.K_LEFT]:
-        player_rect.x -= SPEED
+    # if player_rect.colliderect(top_left_wall_rect):
+    #     player_rect.left = 95
 
+    # Main room wall borders
+    # if player_rect.left <= 95 and player_rect.top <= 350: player_rect.top = 350
+    # elif player_rect.left <= 95 and player_rect.top >= 350: player_rect.left = 95
+    # if player_rect.top <= 175: player_rect.top = 175
+    # if player_rect.right >= 575: player_rect.right = 575
+    # if player_rect.bottom >= 640: player_rect.bottom = 640
+    
+    # Doorways
+    
+
+    # if player_rect.left <= 95 and player_rect.bottom >=450:
+    #     player_rect.x = 95
     # Screen wrapping
     # if player_rect.right < 0:
     #     player_rect.left = 800
