@@ -2,6 +2,7 @@
 import pygame
 import pytmx
 from Player import Player
+from Wall import Wall
 from sys import exit
 
 # Constants
@@ -30,6 +31,10 @@ player.add(Player())
 # Walls
 top_left_wall_surf = pygame.Surface((1,350))
 top_left_wall_rect = top_left_wall_surf.get_rect(bottomright = (95,350))
+# wall_group = pygame.sprite.Group()
+# wall_group.add(Wall())
+
+
 
 
 # Game loop
@@ -54,14 +59,11 @@ while True:
 
     # Surfaces
     # screen.blit(player_surf,player_rect)
-    # pygame.draw.rect(screen,'Red', top_left_wall_rect)
-
+    # wall_group.draw(screen)
+    # wall_group.update()
     # Player
     player.draw(screen)
     player.update()
-
-    # if player_rect.colliderect(top_left_wall_rect):
-    #     player_rect.left = 95
 
     # Main room wall borders
     # if player_rect.left <= 95 and player_rect.top <= 350: player_rect.top = 350
