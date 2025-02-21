@@ -52,14 +52,9 @@ while True:
     tile_map.draw_collision(screen, camera_offset_x, camera_offset_y)
     player.update(tile_map.collision_rects, camera_offset_x, camera_offset_y, screen)
 
-    # Game States 
-    if player_sprite.rect.x >= 675:
-        bin_rm = True
+    # Room
 
-    if bin_rm:
-        tile_map = TileMap("./Graphics/tilemaps/rightRoom.tmx", ZOOM)
 
-    
     # Update the display
     pygame.display.update()
     clock.tick(60)
