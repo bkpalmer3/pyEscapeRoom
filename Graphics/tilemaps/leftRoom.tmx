@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="27" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="9">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="27" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="10">
  <tileset firstgid="1" source="../tilesets/mainRoom/tileset.tsx"/>
  <layer id="1" name="Floor" width="27" height="30">
   <data encoding="csv">
@@ -70,7 +70,6 @@
 </data>
  </layer>
  <objectgroup id="5" name="Collision">
-  <object id="1" x="420.061" y="225.057" width="10.484" height="71.9904"/>
   <object id="2" x="385.114" y="289.36" width="45.4308" height="6.29042"/>
   <object id="3" x="385.114" y="289.36" width="9.78511" height="153.067"/>
   <object id="4" x="37.7425" y="432.641" width="358.554" height="6.98936"/>
@@ -78,6 +77,9 @@
   <object id="6" x="37.7425" y="95.7542" width="354.361" height="6.29042"/>
   <object id="7" x="384.415" y="95.7542" width="8.38723" height="139.088"/>
   <object id="8" x="383.017" y="224.358" width="47.5277" height="10.484"/>
+ </objectgroup>
+ <objectgroup id="6" name="Door">
+  <object id="9" x="420.76" y="229.95" width="14.6777" height="64.3021"/>
  </objectgroup>
  <layer id="4" name="Roof" width="27" height="30">
   <data encoding="csv">

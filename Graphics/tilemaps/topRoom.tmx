@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="27" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="9">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="27" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="11">
  <tileset firstgid="1" source="../tilesets/mainRoom/tileset.tsx"/>
  <layer id="1" name="Floor" width="27" height="30">
   <data encoding="csv">
@@ -74,10 +74,12 @@
   <object id="2" x="382.295" y="96.7914" width="14.61" height="348.205"/>
   <object id="3" x="241.065" y="431.604" width="155.84" height="12.7838"/>
   <object id="4" x="240.457" y="432.822" width="10.3488" height="49.9176"/>
-  <object id="5" x="183.234" y="466.912" width="67.5713" height="10.9575"/>
   <object id="6" x="183.234" y="431.604" width="9.13126" height="43.2213"/>
   <object id="7" x="38.9601" y="432.213" width="152.188" height="6.69626"/>
   <object id="8" x="37.7425" y="93.7476" width="11.5663" height="344.553"/>
+ </objectgroup>
+ <objectgroup id="6" name="Door">
+  <object id="10" x="187.495" y="465.694" width="59.6576" height="15.8275"/>
  </objectgroup>
  <layer id="4" name="Roof" width="27" height="30">
   <data encoding="csv">

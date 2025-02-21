@@ -23,7 +23,7 @@
                 5
             ],
             "scale": 2,
-            "selectedLayer": 2,
+            "selectedLayer": 3,
             "viewCenter": {
                 "x": 219,
                 "y": 153.25
@@ -31,10 +31,11 @@
         },
         "C:/Users/Peter/Desktop/pyEscapeRoom/Graphics/tilemaps/leftRoom.tmx": {
             "expandedObjectLayers": [
-                5
+                5,
+                6
             ],
             "scale": 1.4307459677419354,
-            "selectedLayer": 2,
+            "selectedLayer": 3,
             "viewCenter": {
                 "x": 217.36912562530827,
                 "y": 220.51433805397028
@@ -45,7 +46,7 @@
                 5
             ],
             "scale": 1.4146739130434782,
-            "selectedLayer": 2,
+            "selectedLayer": 7,
             "viewCenter": {
                 "x": 168.23665001920858,
                 "y": 176.36573184786783
@@ -53,10 +54,11 @@
         },
         "C:/Users/Peter/Desktop/pyEscapeRoom/Graphics/tilemaps/rightRoom.tmx": {
             "expandedObjectLayers": [
-                5
+                5,
+                6
             ],
             "scale": 1.6427083333333334,
-            "selectedLayer": 2,
+            "selectedLayer": 3,
             "viewCenter": {
                 "x": 210.62777425491439,
                 "y": 240.15218769816107
@@ -66,8 +68,12 @@
             "scaleInDock": 1
         },
         "C:/Users/Peter/Desktop/pyEscapeRoom/Graphics/tilemaps/topRoom.tmx": {
+            "expandedObjectLayers": [
+                5,
+                6
+            ],
             "scale": 1.6427083333333334,
-            "selectedLayer": 2,
+            "selectedLayer": 3,
             "viewCenter": {
                 "x": 216.10653138871274,
                 "y": 240.15218769816107
