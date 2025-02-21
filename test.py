@@ -11,7 +11,11 @@ pygame.init()
 screen = pygame.display.set_mode((800, 600))  # Set to any size for now
 clock = pygame.time.Clock()
 
-
+# Game States
+maze_rm = False
+bin_rm = False
+form_rm = False
+dice_rm = False
 
 
 # Initialize the tile map
@@ -47,6 +51,14 @@ while True:
     tile_map.draw_over(screen, camera_offset_x, camera_offset_y)
     tile_map.draw_collision(screen, camera_offset_x, camera_offset_y)
     player.update(tile_map.collision_rects, camera_offset_x, camera_offset_y, screen)
+
+    # Game States 
+    if player_sprite.rect.x >= 675:
+        bin_rm = True
+
+    if bin_rm:
+        tile_map = TileMap("./Graphics/tilemaps/rightRoom.tmx", ZOOM)
+
     
     # Update the display
     pygame.display.update()
