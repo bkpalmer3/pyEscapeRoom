@@ -5,7 +5,7 @@ from Tilemap import TileMap
 from Player import Player
 
 ZOOM = 2
-SPEED = 1
+SPEED = 2
 
 pygame.init()
 screen = pygame.display.set_mode((800, 600))  # Set to any size for now
@@ -15,9 +15,9 @@ clock = pygame.time.Clock()
 
 
 # Initialize the tile map
-tile_map = TileMap("./Graphics/tilemaps/TopRoom.tmx", ZOOM)
+tile_map = TileMap("./Graphics/tilemaps/mainRoom.tmx", ZOOM)
 player = pygame.sprite.GroupSingle()
-player.add(Player(SPEED))
+player.add(Player(SPEED, ZOOM))
 player_sprite = player.sprite
 
 
@@ -40,8 +40,10 @@ while True:
     screen.fill((0, 0, 0))
 
     # Draw the map and player
-    tile_map.draw(screen, camera_offset_x, camera_offset_y)
+    tile_map.draw_under(screen, camera_offset_x, camera_offset_y)
     player_sprite.draw(camera_offset_x, camera_offset_y, screen)
+    tile_map.draw_over(screen, camera_offset_x, camera_offset_y)
+    tile_map.draw_collision(screen, camera_offset_x, camera_offset_y)
     player.update(tile_map.collision_rects, camera_offset_x, camera_offset_y, screen)
     
     # Update the display

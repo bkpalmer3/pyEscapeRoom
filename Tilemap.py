@@ -41,4 +41,43 @@ class TileMap:
         for rect in self.collision_rects:
             adjusted_rect = rect.move(-camera_offset_x, -camera_offset_y)
             pygame.draw.rect(screen, (255, 0, 0), adjusted_rect, 1)  # Red outline
+    def draw_under(self, screen, camera_offset_x, camera_offset_y):
+        """Draw the map under the player"""
+        for layer in self.map_data.visible_layers:
+            if isinstance(layer, pytmx.TiledTileLayer):
+                if layer.name == "Floor":
+                    for x, y, gid in layer:
+                        tile_image = self.map_data.get_tile_image_by_gid(gid)
+                        if tile_image:
+                            scaled_tile = pygame.transform.scale(
+                                tile_image, (self.map_data.tilewidth * self.zoom, self.map_data.tileheight * self.zoom)
+                            )
+                            # Apply the camera offset
+                            screen.blit(scaled_tile, (x * self.map_data.tilewidth * self.zoom - camera_offset_x, y * self.map_data.tileheight * self.zoom - camera_offset_y))
+                elif layer.name == "Walls":
+                    for x, y, gid in layer:
+                        tile_image = self.map_data.get_tile_image_by_gid(gid)
+                        if tile_image:
+                            scaled_tile = pygame.transform.scale(
+                                tile_image, (self.map_data.tilewidth * self.zoom, self.map_data.tileheight * self.zoom)
+                            )
+                            # Apply the camera offset
+                            screen.blit(scaled_tile, (x * self.map_data.tilewidth * self.zoom - camera_offset_x, y * self.map_data.tileheight * self.zoom - camera_offset_y))
+    def draw_over(self, screen, camera_offset_x, camera_offset_y):
+        """Draw the map over the player"""
+        for layer in self.map_data.visible_layers:
+            if isinstance(layer, pytmx.TiledTileLayer) and layer.name == "Roof":
+                for x, y, gid in layer:
+                    tile_image = self.map_data.get_tile_image_by_gid(gid)
+                    if tile_image:
+                        scaled_tile = pygame.transform.scale(
+                            tile_image, (self.map_data.tilewidth * self.zoom, self.map_data.tileheight * self.zoom)
+                        )
+                        # Apply the camera offset
+                        screen.blit(scaled_tile, (x * self.map_data.tilewidth * self.zoom - camera_offset_x, y * self.map_data.tileheight * self.zoom - camera_offset_y))
 
+    def draw_collision(self, screen, camera_offset_x, camera_offset_y):
+        # Draw collision rectangles adjusted for camera
+        for rect in self.collision_rects:
+            adjusted_rect = rect.move(-camera_offset_x, -camera_offset_y)
+            pygame.draw.rect(screen, (255, 0, 0), adjusted_rect, 1)  # Red outline
