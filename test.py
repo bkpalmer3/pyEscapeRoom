@@ -27,6 +27,8 @@ while True:
         if event.type == pygame.QUIT:
             pygame.quit()
             exit()
+        # mouse position for testing
+        if event.type == pygame.MOUSEMOTION: print(event.pos)
 
     # Calculate camera offsets
     camera_offset_x = player_sprite.rect.x - screen.get_width() // 2

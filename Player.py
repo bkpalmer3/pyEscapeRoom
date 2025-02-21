@@ -29,6 +29,10 @@ class Player(pygame.sprite.Sprite):
         self._extract_frames()
         self.image = self.sprite_frames[self.current_frame]
         self.rect = self.image.get_rect(center=(330, 330))
+        self.starting_x = 310
+        self.starting_y = 415
+        self.rect.x = self.starting_x
+        self.rect.y = self.starting_y
 
     def _extract_frames(self):
         def _get_frame(sprite_sheet, x, y, width, height, zoom):
