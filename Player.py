@@ -1,7 +1,7 @@
 import pygame
 
 class Player(pygame.sprite.Sprite):
-    def __init__(self, speed, zoom):
+    def __init__(self, speed, zoom, screen, tile_map):
         super().__init__()
 
         self.sprite_sheets = {
@@ -29,10 +29,10 @@ class Player(pygame.sprite.Sprite):
         self._extract_frames()
         self.image = self.sprite_frames[self.current_frame]
         self.rect = self.image.get_rect(center=(330, 330))
-        self.starting_x = 310
-        self.starting_y = 415
-        self.rect.x = self.starting_x
-        self.rect.y = self.starting_y
+        self.starting_x = 336
+        self.starting_y = 388
+        self.rect.center = (self.starting_x, self.starting_y)
+        self.camera = None  # Camera will be set externally
 
     def _extract_frames(self):
         def _get_frame(sprite_sheet, x, y, width, height, zoom):
@@ -57,7 +57,11 @@ class Player(pygame.sprite.Sprite):
                 frame = _get_frame(self.sprite_sheet, x, y, frame_width, frame_height, self.zoom)
                 self.sprite_frames.append(frame)
 
-    def player_controls(self, collision_rects, camera_offset_x, camera_offset_y):
+    def set_camera(self, camera):
+        """Link the player to the camera."""
+        self.camera = camera
+
+    def player_controls(self, doors, collision_rects, tile_map):
         keys = pygame.key.get_pressed()
         previous_action = self.current_action
         self.state = "idle"  # Default to idle unless movement is detected
@@ -65,29 +69,37 @@ class Player(pygame.sprite.Sprite):
         if keys[pygame.K_UP]:
             self.current_action = "walk_up"
             self.rect.y -= self.speed
-            if self.check_collision(collision_rects, camera_offset_x, camera_offset_y):
+            if self.check_collision(collision_rects):
                 self.rect.y += self.speed
+            if self.check_door(doors):
+                pass
             self.state = "moving"
 
         if keys[pygame.K_DOWN]:
             self.current_action = "walk_down"
             self.rect.y += self.speed
-            if self.check_collision(collision_rects, camera_offset_x, camera_offset_y):
+            if self.check_collision(collision_rects):
                 self.rect.y -= self.speed
+            if self.check_door(doors):
+                pass
             self.state = "moving"
 
         if keys[pygame.K_LEFT]:
             self.current_action = "walk_left"
             self.rect.x -= self.speed
-            if self.check_collision(collision_rects, camera_offset_x, camera_offset_y):
+            if self.check_collision(collision_rects):
                 self.rect.x += self.speed
+            if self.check_door(doors):
+                pass
             self.state = "moving"
 
         if keys[pygame.K_RIGHT]:
             self.current_action = "walk_right"
             self.rect.x += self.speed
-            if self.check_collision(collision_rects, camera_offset_x, camera_offset_y):
+            if self.check_collision(collision_rects):
                 self.rect.x -= self.speed
+            if self.check_door(doors):
+                pass
             self.state = "moving"
 
         # If no keys are pressed, switch to the corresponding idle animation
@@ -100,18 +112,39 @@ class Player(pygame.sprite.Sprite):
             self.sprite_sheet = pygame.image.load(self.sprite_sheets[self.current_action]).convert_alpha()
             self._extract_frames()
             self.current_frame = 0
+        
+        self.camera.update(self, tile_map.width, tile_map.height)
 
-    def check_collision(self, collision_rects, camera_offset_x, camera_offset_y):
+    def check_collision(self, collision_rects):
         for rect in collision_rects:
             if self.rect.colliderect(rect):
                 return True
         return False
-    def draw(self, camera_offset_x, camera_offset_y, screen):
-        screen.blit(self.image, (self.rect.x - camera_offset_x, self.rect.y - camera_offset_y))
-        pygame.draw.rect(screen, (0, 255, 0), self.rect.move(-camera_offset_x, -camera_offset_y), 1)  # Green outline for the player
 
-    def update(self, collision_rects, camera_offset_x, camera_offset_y, screen):
-        self.player_controls(collision_rects, camera_offset_x, camera_offset_y)
+    def check_door(self, doors):
+        room_numb = 1
+        for rect in doors:
+            if rect and self.rect.colliderect(rect):
+                print(room_numb)
+                return room_numb  # Return the room number instead of True
+            room_numb += 1
+        return None  # No door collision
+
+    def draw(self, screen):
+        # Apply camera transformations when drawing the player
+        if self.camera:
+            screen.blit(self.image, (self.rect.x - self.camera.camera.x, self.rect.y - self.camera.camera.y))
+            pygame.draw.rect(screen, (0, 255, 0), self.rect.move(-self.camera.camera.x, -self.camera.camera.y), 1)  # Green outline for the player
+        else:
+            screen.blit(self.image, self.rect)
+
+    def update(self, doors, collision_rects, tile_map):
+        self.player_controls(doors, collision_rects, tile_map)
+
+        # If a door collision happens, change room
+        new_room = self.check_door(doors)
+        if new_room:
+            tile_map.change_room(new_room, self)
 
         current_time = pygame.time.get_ticks()
         if current_time - self.last_update_time > self.animation_delay:

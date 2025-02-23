@@ -69,7 +69,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup id="5" name="Collision">
+ <objectgroup id="5" name="Collision" visible="0">
   <object id="2" x="39.5" y="97" width="6.5" height="335"/>
   <object id="4" x="38.5" y="431.5" width="355.5" height="7"/>
   <object id="5" x="385" y="94" width="8" height="338"/>
@@ -78,7 +78,7 @@
   <object id="8" x="183.5" y="63.5" width="5.5" height="37"/>
   <object id="9" x="241" y="64.5" width="12" height="35.5"/>
  </objectgroup>
- <objectgroup id="7" name="Door">
+ <objectgroup id="7" name="Door" visible="0">
   <object id="11" x="185.5" y="57.5" width="61.5" height="10"/>
  </objectgroup>
  <layer id="4" name="Roof" width="27" height="30">

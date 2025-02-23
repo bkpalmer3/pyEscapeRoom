@@ -1,93 +1,68 @@
-# imports
 import pygame
 import pytmx
+import sys
+from Tilemap import TileMap
 from Player import Player
-from Wall import Wall
-from sys import exit
+from Camera import Camera
 
-# Constants
-# SPEED = 3
-ZOOM = 2
-
-# Setup and display
+# Initialize Pygame
 pygame.init()
-screen = pygame.display.set_mode((800, 600))  # Set to any size for now
+
+# Game window dimensions
+WINDOW_WIDTH = 21 * 32
+WINDOW_HEIGHT = 23 * 32
+# WINDOW_WIDTH = 800
+# WINDOW_HEIGHT = 600
+
+# Set up display
+screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
+pygame.display.set_caption("Tile Map Game")
+
+# Game settings
+ZOOM = 2
+SPEED = 2
+
+# Load the tile map and player
+tile_map = TileMap(ZOOM)  # Adjust the path as needed
+player = Player(SPEED, ZOOM, screen, tile_map)
+camera = Camera(WINDOW_WIDTH, WINDOW_HEIGHT)
+
+# Link the player to the camera
+player.set_camera(camera)
+
+# Clock for controlling frame rate
 clock = pygame.time.Clock()
 
-# Load the TMX map
-tmx_data = pytmx.load_pygame("./Graphics/tilemaps/mainRoom.tmx")
-
-# Update the display size based on the map dimensions
-width = tmx_data.tilewidth * tmx_data.width * ZOOM
-height = tmx_data.tileheight * tmx_data.height * ZOOM
-screen = pygame.display.set_mode((width, height))
-
-# Surfaces and rectangles
-player = pygame.sprite.GroupSingle()
-player.add(Player())
-# player_surf = pygame.transform.scale(pygame.image.load('graphics/Droop.png').convert_alpha(), (50,50))
-# player_rect = player_surf.get_rect(center = (330, 400))
-
-# Walls
-top_left_wall_surf = pygame.Surface((1,350))
-top_left_wall_rect = top_left_wall_surf.get_rect(bottomright = (95,350))
-# wall_group = pygame.sprite.Group()
-# wall_group.add(Wall())
-
-
-
-
-# Game loop
-while True:
-    # Error handling
+# Main game loop
+running = True
+while running:
+    # Handle events
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            pygame.quit()
-            exit()
-        
-        # Wall tool for creation
+            running = False
         if event.type == pygame.MOUSEMOTION: print(event.pos)
 
-    # Draw the map
-    for layer in tmx_data.visible_layers:
-        if isinstance(layer, pytmx.TiledTileLayer):
-            for x, y, gid in layer:
-                tile_image = tmx_data.get_tile_image_by_gid(gid)
-                if tile_image:
-                    scaled_tile = pygame.transform.scale(tile_image, (tmx_data.tilewidth * ZOOM, tmx_data.tileheight * ZOOM))
-                    screen.blit(scaled_tile, (x * tmx_data.tilewidth * ZOOM, y * tmx_data.tileheight * ZOOM))
-
-    # Surfaces
-    # screen.blit(player_surf,player_rect)
-    # wall_group.draw(screen)
-    # wall_group.update()
-    # Player
-    player.draw(screen)
-    player.update()
-
-    # Main room wall borders
-    # if player_rect.left <= 95 and player_rect.top <= 350: player_rect.top = 350
-    # elif player_rect.left <= 95 and player_rect.top >= 350: player_rect.left = 95
-    # if player_rect.top <= 175: player_rect.top = 175
-    # if player_rect.right >= 575: player_rect.right = 575
-    # if player_rect.bottom >= 640: player_rect.bottom = 640
+    # Update game state
+    player.update(tile_map.doorways, tile_map.collision_rects, tile_map)
     
-    # Doorways
+    # Clear the screen
+    screen.fill((0, 0, 0))
     
+    # Draw the tile map and layers
+    tile_map.draw_under(screen, camera.camera.x, camera.camera.y)
+    player.draw(screen)  # Draw the player (with camera offset)
+    tile_map.draw_over(screen, camera.camera.x, camera.camera.y)
 
-    # if player_rect.left <= 95 and player_rect.bottom >=450:
-    #     player_rect.x = 95
-    # Screen wrapping
-    # if player_rect.right < 0:
-    #     player_rect.left = 800
-    # elif player_rect.left > 800:
-    #     player_rect.right = 0
+    # Draw collision and door hitboxes for debugging (optional)
+    tile_map.draw_collision(screen, camera.camera.x, camera.camera.y)
+    tile_map.draw_doors(screen, camera.camera.x, camera.camera.y)
 
-    # if player_rect.bottom < 0:
-    #     player_rect.top = 400
-    # elif player_rect.top > 400:
-    #     player_rect.bottom = 0
+    # Update the display
+    pygame.display.flip()
 
-    # Display updating and frame rate
-    pygame.display.update()
-    clock.tick(60)
+    # Control the frame rate (FPS)
+    clock.tick(60)  # Limit to 60 frames per second
+
+# Quit Pygame
+pygame.quit()
+sys.exit()

@@ -2,82 +2,135 @@ import pygame
 import pytmx
 
 class TileMap:
-    def __init__(self, map_file, zoom):
-        self.map_data = pytmx.load_pygame(map_file)
+    def __init__(self, zoom):
+        self.rooms = {
+            "main": "./Graphics/tilemaps/mainRoom.tmx",
+            "left": "./Graphics/tilemaps/leftRoom.tmx",
+            "down": "./Graphics/tilemaps/bottomRoom.tmx",
+            "right": "./Graphics/tilemaps/rightRoom.tmx",
+            "up": "./Graphics/tilemaps/topRoom.tmx",
+        }
+        self.current_room = "main"
+        self.map_data = pytmx.load_pygame(self.rooms[self.current_room])
         self.zoom = zoom
 
-        # Used to store all the collision rectangles
+        # Load collision layer
         self.collision_rects = []
         collision_layer = self.map_data.get_layer_by_name("Collision")
         if collision_layer:
             for obj in collision_layer:
-                rect = pygame.Rect(
-                    obj.x * self.zoom, 
-                    obj.y * self.zoom, 
-                    obj.width * self.zoom, 
-                    obj.height * self.zoom
+                self.collision_rects.append(
+                    pygame.Rect(obj.x * zoom, obj.y * zoom, obj.width * zoom, obj.height * zoom)
                 )
-                self.collision_rects.append(rect)
         else:
             print("Warning: Collision layer not found.")
 
-        # Calculate the map dimensions
-        self.width = self.map_data.tilewidth * self.map_data.width * self.zoom
-        self.height = self.map_data.tileheight * self.map_data.height * self.zoom
+        # Initialize doorways
+        self.doorwayUp = self.doorwayLeft = self.doorwayRight = self.doorwayDown = self.doorwayOut = None
+        self.get_doorways()  # Get door positions
 
-    def draw(self, screen, camera_offset_x, camera_offset_y):
-        """Draw the map with camera offset applied."""
+        # Store doorways for easier iteration
+        self.doorways = [self.doorwayDown, self.doorwayLeft, self.doorwayUp, self.doorwayRight, self.doorwayOut]
+
+        # Calculate the map dimensions
+        self.width = self.map_data.tilewidth * self.map_data.width * zoom
+        self.height = self.map_data.tileheight * self.map_data.height * zoom
+
+    def get_doorways(self):
+        """Loads doorway rectangles based on the current room."""
+        def load_door(layer_name):
+            layer = self.map_data.get_layer_by_name(layer_name)
+            if layer:
+                for obj in layer:
+                    return pygame.Rect(obj.x * self.zoom, obj.y * self.zoom, obj.width * self.zoom, obj.height * self.zoom)
+            else:
+                print(f"Warning: {layer_name} not found.")
+            return None  # If no doors found
+
+        if self.current_room == "main":
+            # self.doorwayUp = load_door("DoorUp")
+            self.doorwayRight = load_door("DoorRight")
+            self.doorwayDown = load_door("DoorDown")
+            self.doorwayLeft = load_door("DoorLeft")
+            self.doorwayOut = None
+        else:
+            self.doorwayOut = load_door("Door")
+            self.doorwayDown = self.doorwayLeft = self.doorwayUp = self.doorwayRight = None
+        
+        self.doorways = [self.doorwayDown, self.doorwayLeft, self.doorwayUp, self.doorwayRight, self.doorwayOut]
+
+    def change_room(self, room_numb, player):
+        """Updates the current room based on door index and reloads map data."""
+        room_keys = ["up", "left", "down", "right", "main"]  # Adjust if needed
+        if room_numb <= len(room_keys):
+            self.current_room = room_keys[room_numb - 1]
+            self.map_data = pytmx.load_pygame(self.rooms[self.current_room])
+            self.width = self.map_data.tilewidth * self.map_data.width * self.zoom
+            self.height = self.map_data.tileheight * self.map_data.height * self.zoom
+
+            # Reload collisions and doors
+            self.collision_rects = []
+            collision_layer = self.map_data.get_layer_by_name("Collision")
+            if collision_layer:
+                for obj in collision_layer:
+                    self.collision_rects.append(
+                        pygame.Rect(obj.x * self.zoom, obj.y * self.zoom, obj.width * self.zoom, obj.height * self.zoom)
+                    )
+
+            self.get_doorways()  # Reload doors
+            # This needs to be updated
+            if room_numb == 1:  # Example: entering from below
+                player.rect.x = 415
+                player.rect.y = 785
+
+            elif room_numb == 2:  # Example: entering from the left
+                player.rect.x = 700
+                player.rect.y = 500
+                
+            elif room_numb == 3:  # Example: entering from above
+                player.rect.y = self.map_data.height - 10
+
+            elif room_numb == 4:  # Example: entering from the right
+                player.rect.x = 130
+                player.rect.y = 500
+
+            elif room_numb == 5:
+                player.rect.x = 336
+                player.rect.y = 388
+
+            player.camera.update(player, self.width, self.height)
+            player.camera.apply(player)
+
+    def draw_layer(self, screen, camera_offset_x, camera_offset_y, layer_names):
+        """Draws specified layers from the tilemap."""
         for layer in self.map_data.visible_layers:
-            if isinstance(layer, pytmx.TiledTileLayer):
+            if isinstance(layer, pytmx.TiledTileLayer) and layer.name in layer_names:
                 for x, y, gid in layer:
                     tile_image = self.map_data.get_tile_image_by_gid(gid)
                     if tile_image:
                         scaled_tile = pygame.transform.scale(
-                            tile_image, (self.map_data.tilewidth * self.zoom, self.map_data.tileheight * self.zoom)
+                            tile_image, 
+                            (self.map_data.tilewidth * self.zoom, self.map_data.tileheight * self.zoom)
                         )
                         # Apply the camera offset
-                        screen.blit(scaled_tile, (x * self.map_data.tilewidth * self.zoom - camera_offset_x, y * self.map_data.tileheight * self.zoom - camera_offset_y))
-        # Draw collision rectangles adjusted for camera
-        for rect in self.collision_rects:
-            adjusted_rect = rect.move(-camera_offset_x, -camera_offset_y)
-            pygame.draw.rect(screen, (255, 0, 0), adjusted_rect, 1)  # Red outline
+                        screen.blit(scaled_tile, (x * self.map_data.tilewidth * self.zoom - camera_offset_x,
+                                                  y * self.map_data.tileheight * self.zoom - camera_offset_y))
+
     def draw_under(self, screen, camera_offset_x, camera_offset_y):
-        """Draw the map under the player"""
-        for layer in self.map_data.visible_layers:
-            if isinstance(layer, pytmx.TiledTileLayer):
-                if layer.name == "Floor":
-                    for x, y, gid in layer:
-                        tile_image = self.map_data.get_tile_image_by_gid(gid)
-                        if tile_image:
-                            scaled_tile = pygame.transform.scale(
-                                tile_image, (self.map_data.tilewidth * self.zoom, self.map_data.tileheight * self.zoom)
-                            )
-                            # Apply the camera offset
-                            screen.blit(scaled_tile, (x * self.map_data.tilewidth * self.zoom - camera_offset_x, y * self.map_data.tileheight * self.zoom - camera_offset_y))
-                elif layer.name == "Walls":
-                    for x, y, gid in layer:
-                        tile_image = self.map_data.get_tile_image_by_gid(gid)
-                        if tile_image:
-                            scaled_tile = pygame.transform.scale(
-                                tile_image, (self.map_data.tilewidth * self.zoom, self.map_data.tileheight * self.zoom)
-                            )
-                            # Apply the camera offset
-                            screen.blit(scaled_tile, (x * self.map_data.tilewidth * self.zoom - camera_offset_x, y * self.map_data.tileheight * self.zoom - camera_offset_y))
+        """Draws the layers that should appear under the player (Floor, Walls)."""
+        self.draw_layer(screen, camera_offset_x, camera_offset_y, {"Floor", "Walls"})
+
     def draw_over(self, screen, camera_offset_x, camera_offset_y):
-        """Draw the map over the player"""
-        for layer in self.map_data.visible_layers:
-            if isinstance(layer, pytmx.TiledTileLayer) and layer.name == "Roof":
-                for x, y, gid in layer:
-                    tile_image = self.map_data.get_tile_image_by_gid(gid)
-                    if tile_image:
-                        scaled_tile = pygame.transform.scale(
-                            tile_image, (self.map_data.tilewidth * self.zoom, self.map_data.tileheight * self.zoom)
-                        )
-                        # Apply the camera offset
-                        screen.blit(scaled_tile, (x * self.map_data.tilewidth * self.zoom - camera_offset_x, y * self.map_data.tileheight * self.zoom - camera_offset_y))
+        """Draws the layers that should appear over the player (Roof)."""
+        self.draw_layer(screen, camera_offset_x, camera_offset_y, {"Roof"})
 
     def draw_collision(self, screen, camera_offset_x, camera_offset_y):
-        # Draw collision rectangles adjusted for camera
+        """Draws collision boxes (debugging only)."""
         for rect in self.collision_rects:
-            adjusted_rect = rect.move(-camera_offset_x, -camera_offset_y)
-            pygame.draw.rect(screen, (255, 0, 0), adjusted_rect, 1)  # Red outline
+            pygame.draw.rect(screen, (255, 0, 0), rect.move(-camera_offset_x, -camera_offset_y), 1)  # Red outline
+
+    def draw_doors(self, screen, camera_offset_x, camera_offset_y):
+        """Draws door hitboxes for debugging."""
+        for rect in self.doorways:
+            if rect:
+                pygame.draw.rect(screen, (0, 0, 255), rect.move(-camera_offset_x, -camera_offset_y), 1)  # Blue outline
