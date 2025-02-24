@@ -24,6 +24,9 @@ class TileMap:
                 )
         else:
             print("Warning: Collision layer not found.")
+        self.button_0 = self.button_1 = self.button_2 = self.button_3 = self.button_4 = self.button_5 = self.button_6 = self.button_7 = self.button_8 = self.button_9 = None
+        self.get_buttons()
+        self.buttons = [self.button_0, self.button_1, self.button_2, self.button_3, self.button_4, self.button_5, self.button_6, self.button_7, self.button_8, self.button_9]
 
         # Initialize doorways
         self.doorwayUp = self.doorwayLeft = self.doorwayRight = self.doorwayDown = self.doorwayOut = None
@@ -35,6 +38,33 @@ class TileMap:
         # Calculate the map dimensions
         self.width = self.map_data.tilewidth * self.map_data.width * zoom
         self.height = self.map_data.tileheight * self.map_data.height * zoom
+    def get_buttons(self):
+        """Loads the button rectangles for the right room"""
+        def load_button(layer_name):
+            layer = self.map_data.get_layer_by_name(layer_name)
+            if layer:
+                for obj in layer:
+                    return pygame.Rect(obj.x * self.zoom, obj.y * self.zoom, obj.width * self.zoom, obj.height * self.zoom)
+            else:
+                print(f"Warning: {layer_name} not found.")
+            return None  # If no doors found
+        
+        if self.current_room == 'right':
+            self.button_0 = load_button("Button_0")
+            self.button_1 = load_button("Button_1")
+            self.button_2 = load_button("Button_2")
+            self.button_3 = load_button("Button_3")
+            self.button_4 = load_button("Button_4")
+            self.button_5 = load_button("Button_5")
+            self.button_6 = load_button("Button_6")
+            self.button_7 = load_button("Button_7")
+            self.button_8 = load_button("Button_8")
+            self.button_9 = load_button("Button_9")
+        else:
+            # If it's not the correct room or if you leave the room remove the buttons
+            self.button_0 = self.button_1 = self.button_2 = self.button_3 = self.button_4 = self.button_5 = self.button_6 = self.button_7 = self.button_8 = self.button_9 = None
+        
+        self.buttons = [self.button_0, self.button_1, self.button_2, self.button_3, self.button_4, self.button_5, self.button_6, self.button_7, self.button_8, self.button_9]
 
     def get_doorways(self):
         """Loads doorway rectangles based on the current room."""
@@ -78,10 +108,11 @@ class TileMap:
                     )
 
             self.get_doorways()  # Reload doors
+            self.get_buttons() # Get Buttons if correct room
             # This needs to be updated
             if room_numb == 1:  # Example: entering from below
-                player.rect.x = 415
-                player.rect.y = 785
+                player.rect.x = 790
+                player.rect.y = 1510
 
             elif room_numb == 2:  # Example: entering from the left
                 player.rect.x = 700
@@ -134,3 +165,9 @@ class TileMap:
         for rect in self.doorways:
             if rect:
                 pygame.draw.rect(screen, (0, 0, 255), rect.move(-camera_offset_x, -camera_offset_y), 1)  # Blue outline
+
+    def draw_buttons(self, screen, camera_offset_x, camera_offset_y):
+        """Draws door hitboxes for debugging."""
+        for rect in self.buttons:
+            if rect:
+                pygame.draw.rect(screen, (255, 255, 0), rect.move(-camera_offset_x, -camera_offset_y), 1) # Yellow outline
