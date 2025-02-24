@@ -11,8 +11,10 @@ pygame.init()
 # Game window dimensions
 WINDOW_WIDTH = 21 * 32
 WINDOW_HEIGHT = 23 * 32
-# WINDOW_WIDTH = 800
-# WINDOW_HEIGHT = 600
+OVERLAY_WINDOW_WIDTH = 15 * 32
+OVERLAY_WINDOW_HEIGHT = 10 * 32
+OVERLAY_WINDOW_COLOR = (0, 255, 255, 128)
+WHITE = (255, 255, 255)
 
 # Set up display
 screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
@@ -21,6 +23,14 @@ pygame.display.set_caption("Tile Map Game")
 # Game settings
 ZOOM = 2
 SPEED = 2
+
+pygame.mixer.init()
+# Load the music file
+pygame.mixer.music.load("./Music/Pixel_Music_Pack/mp3/Pixel_5.mp3")
+# Play the music (loops = -1 makes it loop forever)
+pygame.mixer.music.play(loops=-1)
+# Set volume (0.0 to 1.0)
+pygame.mixer.music.set_volume(0.5)
 
 # Load the tile map and player
 tile_map = TileMap(ZOOM)  # Adjust the path as needed
@@ -37,13 +47,17 @@ clock = pygame.time.Clock()
 running = True
 while running:
     # Handle events
-    for event in pygame.event.get():
+    events = pygame.event.get()
+    for event in events:
         if event.type == pygame.QUIT:
             running = False
-        if event.type == pygame.MOUSEMOTION: print(event.pos)
+        # if event.type == pygame.MOUSEMOTION: print(event.pos)
+        # if event.type == pygame.KEYDOWN:
+        #     if event.key == pygame.K_e:  # Press "E" to toggle overlay
+        #         overlay_active = not overlay_active
 
     # Update game state
-    player.update(tile_map.doorways, tile_map.collision_rects, tile_map)
+    player.update(tile_map.doorways, tile_map.collision_rects, tile_map, events)
     
     # Clear the screen
     screen.fill((0, 0, 0))
@@ -53,9 +67,14 @@ while running:
     player.draw(screen)  # Draw the player (with camera offset)
     tile_map.draw_over(screen, camera.camera.x, camera.camera.y)
 
+
+    tile_map.draw_computer_screen(OVERLAY_WINDOW_WIDTH, OVERLAY_WINDOW_HEIGHT, OVERLAY_WINDOW_COLOR, screen)
+
     # Draw collision and door hitboxes for debugging (optional)
     tile_map.draw_collision(screen, camera.camera.x, camera.camera.y)
     tile_map.draw_doors(screen, camera.camera.x, camera.camera.y)
+    tile_map.draw_buttons(screen, camera.camera.x, camera.camera.y)
+    tile_map.draw_computer(screen, camera.camera.x, camera.camera.y)
 
     # Update the display
     pygame.display.flip()
