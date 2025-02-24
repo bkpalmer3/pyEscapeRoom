@@ -45,6 +45,9 @@ class TileMap:
 
         self.computer_display_active = False
 
+        self.window_text = ["Press E To Close"]
+        self.buttons_pushed = ""
+
     def get_computer(self):
         """Loads the button rectangles for the room"""
         def load_computer(layer_name):
@@ -58,10 +61,14 @@ class TileMap:
         
         if self.current_room == "main":
             self.computer = load_computer("Computer")
+            self.window_text = ["This Will Be Changed Later As The Way To Win"]
         elif self.current_room == "right":
             self.computer = load_computer("Computer")
+            self.buttons_pushed = ""
+            self.window_text = ["Buttons Pushed:", "(Leave Room To Reset Numbers)", self.buttons_pushed]
         elif self.current_room == "up":
             self.computer = load_computer("Computer")
+            self.window_text = ["0 | 0000", "1 | 0001", "2 | 0010", "3 | 0011", "4 | 0100", "5 | 0101", "6 | 0110", "7 | 0111", "8 | 1000", "9 | 1001", "A | 1010", "B | 1011", "C | 1100", "D | 1101", "E | 1110", "F | 1111"]
         else:
             self.computer = None
 
@@ -183,6 +190,53 @@ class TileMap:
     def draw_over(self, screen, camera_offset_x, camera_offset_y):
         """Draws the layers that should appear over the player (Roof)."""
         self.draw_layer(screen, camera_offset_x, camera_offset_y, {"Roof"})
+
+    def draw_computer_screen(self, overlay_width, overlay_height, overlay_color, screen):
+        if self.computer_display_active:
+            overlay_surface = pygame.Surface((overlay_width, overlay_height), pygame.SRCALPHA)  # Enable transparency
+            overlay_surface.fill(overlay_color)
+
+            overlay_x = (screen.get_width() - overlay_width) // 2  # Center X
+            overlay_y = (screen.get_height() - overlay_height) // 2  # Center Y
+
+            # Render text
+            font = pygame.font.Font(None, 24)
+            line_spacing = 30  # Space between lines
+
+            if len(self.window_text) > 10:  # If there's a long list, use two columns
+                text_x_left = overlay_x + 40  # Left column position
+                text_x_right = overlay_x + overlay_width // 2 + 40  # Right column position
+                text_y = overlay_y + 20  # Start below the top edge
+
+                # Split text into two columns
+                midpoint = len(self.window_text) // 2
+                left_column = self.window_text[:midpoint]
+                right_column = self.window_text[midpoint:]
+
+                # Draw left column
+                for line in left_column:
+                    text_surface = font.render(line, True, (255, 255, 255))
+                    screen.blit(text_surface, (text_x_left, text_y))
+                    text_y += line_spacing
+
+                # Reset Y position for right column
+                text_y = overlay_y + 20
+
+                # Draw right column
+                for line in right_column:
+                    text_surface = font.render(line, True, (255, 255, 255))
+                    screen.blit(text_surface, (text_x_right, text_y))
+                    text_y += line_spacing
+            else:  # If it's just a small amount of text, center it
+                text_y = overlay_y + (overlay_height - (len(self.window_text) * line_spacing)) // 2  # Center vertically
+                for line in self.window_text:
+                    text_surface = font.render(line, True, (255, 255, 255))
+                    text_rect = text_surface.get_rect(center=(overlay_x + overlay_width // 2, text_y))
+                    screen.blit(text_surface, text_rect)
+                    text_y += line_spacing
+
+            screen.blit(overlay_surface, (overlay_x, overlay_y))
+
 
     def draw_collision(self, screen, camera_offset_x, camera_offset_y):
         """Draws collision boxes (debugging only)."""

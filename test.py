@@ -14,6 +14,7 @@ WINDOW_HEIGHT = 23 * 32
 OVERLAY_WINDOW_WIDTH = 15 * 32
 OVERLAY_WINDOW_HEIGHT = 10 * 32
 OVERLAY_WINDOW_COLOR = (0, 255, 255, 128)
+WHITE = (255, 255, 255)
 
 # Set up display
 screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
@@ -23,9 +24,13 @@ pygame.display.set_caption("Tile Map Game")
 ZOOM = 2
 SPEED = 2
 
-overlay_active = False
-overlay_surface = pygame.Surface((OVERLAY_WINDOW_WIDTH, OVERLAY_WINDOW_HEIGHT), pygame.SRCALPHA)  # Enable transparency
-overlay_surface.fill(OVERLAY_WINDOW_COLOR)
+pygame.mixer.init()
+# Load the music file
+pygame.mixer.music.load("./Music/Pixel_Music_Pack/mp3/Pixel_5.mp3")
+# Play the music (loops = -1 makes it loop forever)
+pygame.mixer.music.play(loops=-1)
+# Set volume (0.0 to 1.0)
+pygame.mixer.music.set_volume(0.5)
 
 # Load the tile map and player
 tile_map = TileMap(ZOOM)  # Adjust the path as needed
@@ -62,9 +67,8 @@ while running:
     player.draw(screen)  # Draw the player (with camera offset)
     tile_map.draw_over(screen, camera.camera.x, camera.camera.y)
 
-    # Draw overlay
-    if tile_map.computer_display_active:
-        screen.blit(overlay_surface, ((screen.get_width() - OVERLAY_WINDOW_WIDTH) // 2, (screen.get_height() - OVERLAY_WINDOW_HEIGHT) // 2))
+
+    tile_map.draw_computer_screen(OVERLAY_WINDOW_WIDTH, OVERLAY_WINDOW_HEIGHT, OVERLAY_WINDOW_COLOR, screen)
 
     # Draw collision and door hitboxes for debugging (optional)
     tile_map.draw_collision(screen, camera.camera.x, camera.camera.y)

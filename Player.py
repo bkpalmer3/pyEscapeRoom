@@ -62,7 +62,7 @@ class Player(pygame.sprite.Sprite):
         """Link the player to the camera."""
         self.camera = camera
 
-    def player_controls(self, doors, collision_rects, tile_map, near_computer, events):
+    def player_controls(self, doors, collision_rects, tile_map, near_computer, events, near_button):
         keys = pygame.key.get_pressed()
         previous_action = self.current_action
         self.state = "idle"  # Default to idle unless movement is detected
@@ -120,6 +120,9 @@ class Player(pygame.sprite.Sprite):
             if event.type == pygame.KEYDOWN and event.key == pygame.K_e and near_computer:
                 tile_map.computer_display_active = not tile_map.computer_display_active
                 self.window_open = not self.window_open
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_e and near_button:
+                tile_map.buttons_pushed += str(near_button - 1)
+                tile_map.window_text = ["Buttons Pushed:", tile_map.buttons_pushed]
 
 
     def check_collision(self, collision_rects):
@@ -133,12 +136,20 @@ class Player(pygame.sprite.Sprite):
             if self.rect.colliderect(computer):
                 return True
         return False
+    
+    def check_button_collision(self, buttons):
+        button_num = 0
+        if buttons:
+            for button in buttons:
+                button_num += 1
+                if button and self.rect.colliderect(button):
+                    return button_num
+        return 0
 
     def check_door(self, doors):
         room_numb = 1
         for rect in doors:
             if rect and self.rect.colliderect(rect):
-                print(room_numb)
                 return room_numb  # Return the room number instead of True
             room_numb += 1
         return None  # No door collision
@@ -154,8 +165,9 @@ class Player(pygame.sprite.Sprite):
     def update(self, doors, collision_rects, tile_map, events):
         # Check if the player is near a computer
         near_computer = self.check_computer_collision(tile_map.computer)
+        near_button = self.check_button_collision(tile_map.buttons)
 
-        self.player_controls(doors, collision_rects, tile_map, near_computer, events)
+        self.player_controls(doors, collision_rects, tile_map, near_computer, events, near_button)
 
         # If a door collision happens, change room
         new_room = self.check_door(doors)
