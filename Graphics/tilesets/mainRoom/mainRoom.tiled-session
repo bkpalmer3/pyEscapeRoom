@@ -51,7 +51,7 @@
                 6
             ],
             "scale": 4,
-            "selectedLayer": 0,
+            "selectedLayer": 7,
             "viewCenter": {
                 "x": 168,
                 "y": 123.625
@@ -62,11 +62,11 @@
                 5,
                 6
             ],
-            "scale": 2,
-            "selectedLayer": 2,
+            "scale": 3,
+            "selectedLayer": 14,
             "viewCenter": {
-                "x": 217.5,
-                "y": 240.25
+                "x": 200.33333333333334,
+                "y": 326.5
             }
         },
         "C:/Users/Peter/Desktop/pyEscapeRoom/Graphics/tilemaps/tileset.tsx": {

@@ -24,6 +24,10 @@ class TileMap:
                 )
         else:
             print("Warning: Collision layer not found.")
+        
+        self.computer = None
+        self.get_computer()
+
         self.button_0 = self.button_1 = self.button_2 = self.button_3 = self.button_4 = self.button_5 = self.button_6 = self.button_7 = self.button_8 = self.button_9 = None
         self.get_buttons()
         self.buttons = [self.button_0, self.button_1, self.button_2, self.button_3, self.button_4, self.button_5, self.button_6, self.button_7, self.button_8, self.button_9]
@@ -38,6 +42,29 @@ class TileMap:
         # Calculate the map dimensions
         self.width = self.map_data.tilewidth * self.map_data.width * zoom
         self.height = self.map_data.tileheight * self.map_data.height * zoom
+
+        self.computer_display_active = False
+
+    def get_computer(self):
+        """Loads the button rectangles for the room"""
+        def load_computer(layer_name):
+            layer = self.map_data.get_layer_by_name(layer_name)
+            if layer:
+                for obj in layer:
+                    return pygame.Rect(obj.x * self.zoom, obj.y * self.zoom, obj.width * self.zoom, obj.height * self.zoom)
+            else:
+                print(f"Warning: {layer_name} not found.")
+            return None  # If no doors found
+        
+        if self.current_room == "main":
+            self.computer = load_computer("Computer")
+        elif self.current_room == "right":
+            self.computer = load_computer("Computer")
+        elif self.current_room == "up":
+            self.computer = load_computer("Computer")
+        else:
+            self.computer = None
+
     def get_buttons(self):
         """Loads the button rectangles for the right room"""
         def load_button(layer_name):
@@ -109,6 +136,8 @@ class TileMap:
 
             self.get_doorways()  # Reload doors
             self.get_buttons() # Get Buttons if correct room
+            self.get_computer() # Get the computer if there's one in the room
+
             # This needs to be updated
             if room_numb == 1:  # Example: entering from below
                 player.rect.x = 790
@@ -171,3 +200,6 @@ class TileMap:
         for rect in self.buttons:
             if rect:
                 pygame.draw.rect(screen, (255, 255, 0), rect.move(-camera_offset_x, -camera_offset_y), 1) # Yellow outline
+    def draw_computer(self, screen, camera_offset_x, camera_offset_y):
+        if self.computer:
+            pygame.draw.rect(screen, (255, 255, 0), self.computer.move(-camera_offset_x, -camera_offset_y), 1) # Yellow outline

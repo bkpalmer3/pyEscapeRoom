@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="21" height="23" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="35">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="21" height="23" tilewidth="16" tileheight="16" infinite="0" nextlayerid="11" nextobjectid="36">
  <tileset firstgid="1" source="../tilesets/mainRoom/tileset.tsx"/>
  <tileset firstgid="2561" source="../tilesets/mainRoom/tilesStuff.tsx"/>
  <layer id="1" name="Floor" width="21" height="23">
@@ -84,6 +84,9 @@
   <object id="28" x="289.241" y="193.737" width="14.1375" height="13.912"/>
  </objectgroup>
  <objectgroup id="9" name="DoorUp" visible="0"/>
+ <objectgroup id="10" name="Computer">
+  <object id="35" x="144.75" y="80.25" width="47" height="13.5"/>
+ </objectgroup>
  <layer id="4" name="Roof" width="21" height="23">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,

@@ -42,16 +42,17 @@ clock = pygame.time.Clock()
 running = True
 while running:
     # Handle events
-    for event in pygame.event.get():
+    events = pygame.event.get()
+    for event in events:
         if event.type == pygame.QUIT:
             running = False
-        if event.type == pygame.MOUSEMOTION: print(event.pos)
-        if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_e:  # Press "E" to toggle overlay
-                overlay_active = not overlay_active
+        # if event.type == pygame.MOUSEMOTION: print(event.pos)
+        # if event.type == pygame.KEYDOWN:
+        #     if event.key == pygame.K_e:  # Press "E" to toggle overlay
+        #         overlay_active = not overlay_active
 
     # Update game state
-    player.update(tile_map.doorways, tile_map.collision_rects, tile_map)
+    player.update(tile_map.doorways, tile_map.collision_rects, tile_map, events)
     
     # Clear the screen
     screen.fill((0, 0, 0))
@@ -62,13 +63,14 @@ while running:
     tile_map.draw_over(screen, camera.camera.x, camera.camera.y)
 
     # Draw overlay
-    if overlay_active:
+    if tile_map.computer_display_active:
         screen.blit(overlay_surface, ((screen.get_width() - OVERLAY_WINDOW_WIDTH) // 2, (screen.get_height() - OVERLAY_WINDOW_HEIGHT) // 2))
 
     # Draw collision and door hitboxes for debugging (optional)
     tile_map.draw_collision(screen, camera.camera.x, camera.camera.y)
     tile_map.draw_doors(screen, camera.camera.x, camera.camera.y)
     tile_map.draw_buttons(screen, camera.camera.x, camera.camera.y)
+    tile_map.draw_computer(screen, camera.camera.x, camera.camera.y)
 
     # Update the display
     pygame.display.flip()

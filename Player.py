@@ -22,6 +22,7 @@ class Player(pygame.sprite.Sprite):
         self.zoom = zoom
         self.speed = speed
         self.state = "idle"  # Track whether the player is idle or moving
+        self.window_open = False # Used to track if a window is open and if you can move
 
         self.animation_delay = 100
         self.last_update_time = pygame.time.get_ticks()
@@ -61,63 +62,75 @@ class Player(pygame.sprite.Sprite):
         """Link the player to the camera."""
         self.camera = camera
 
-    def player_controls(self, doors, collision_rects, tile_map):
+    def player_controls(self, doors, collision_rects, tile_map, near_computer, events):
         keys = pygame.key.get_pressed()
         previous_action = self.current_action
         self.state = "idle"  # Default to idle unless movement is detected
-
-        if keys[pygame.K_UP]:
-            self.current_action = "walk_up"
-            self.rect.y -= self.speed
-            if self.check_collision(collision_rects):
-                self.rect.y += self.speed
-            if self.check_door(doors):
-                pass
-            self.state = "moving"
-
-        if keys[pygame.K_DOWN]:
-            self.current_action = "walk_down"
-            self.rect.y += self.speed
-            if self.check_collision(collision_rects):
+        if self.window_open == False:
+            if keys[pygame.K_UP]:
+                self.current_action = "walk_up"
                 self.rect.y -= self.speed
-            if self.check_door(doors):
-                pass
-            self.state = "moving"
+                if self.check_collision(collision_rects):
+                    self.rect.y += self.speed
+                if self.check_door(doors):
+                    pass
+                self.state = "moving"
 
-        if keys[pygame.K_LEFT]:
-            self.current_action = "walk_left"
-            self.rect.x -= self.speed
-            if self.check_collision(collision_rects):
-                self.rect.x += self.speed
-            if self.check_door(doors):
-                pass
-            self.state = "moving"
+            if keys[pygame.K_DOWN]:
+                self.current_action = "walk_down"
+                self.rect.y += self.speed
+                if self.check_collision(collision_rects):
+                    self.rect.y -= self.speed
+                if self.check_door(doors):
+                    pass
+                self.state = "moving"
 
-        if keys[pygame.K_RIGHT]:
-            self.current_action = "walk_right"
-            self.rect.x += self.speed
-            if self.check_collision(collision_rects):
+            if keys[pygame.K_LEFT]:
+                self.current_action = "walk_left"
                 self.rect.x -= self.speed
-            if self.check_door(doors):
-                pass
-            self.state = "moving"
+                if self.check_collision(collision_rects):
+                    self.rect.x += self.speed
+                if self.check_door(doors):
+                    pass
+                self.state = "moving"
 
-        # If no keys are pressed, switch to the corresponding idle animation
-        if self.state == "idle":
-            if "walk" in self.current_action:
-                self.current_action = self.current_action.replace("walk", "idle")
+            if keys[pygame.K_RIGHT]:
+                self.current_action = "walk_right"
+                self.rect.x += self.speed
+                if self.check_collision(collision_rects):
+                    self.rect.x -= self.speed
+                if self.check_door(doors):
+                    pass
+                self.state = "moving"
 
-        # If the action has changed, load the new sprite sheet and reset frames
-        if self.current_action != previous_action:
-            self.sprite_sheet = pygame.image.load(self.sprite_sheets[self.current_action]).convert_alpha()
-            self._extract_frames()
-            self.current_frame = 0
-        
-        self.camera.update(self, tile_map.width, tile_map.height)
+            # If no keys are pressed, switch to the corresponding idle animation
+            if self.state == "idle":
+                if "walk" in self.current_action:
+                    self.current_action = self.current_action.replace("walk", "idle")
+
+            # If the action has changed, load the new sprite sheet and reset frames
+            if self.current_action != previous_action:
+                self.sprite_sheet = pygame.image.load(self.sprite_sheets[self.current_action]).convert_alpha()
+                self._extract_frames()
+                self.current_frame = 0
+            
+            self.camera.update(self, tile_map.width, tile_map.height)
+
+        for event in events:
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_e and near_computer:
+                tile_map.computer_display_active = not tile_map.computer_display_active
+                self.window_open = not self.window_open
+
 
     def check_collision(self, collision_rects):
         for rect in collision_rects:
             if self.rect.colliderect(rect):
+                return True
+        return False
+    
+    def check_computer_collision(self, computer):
+        if computer:
+            if self.rect.colliderect(computer):
                 return True
         return False
 
@@ -138,8 +151,11 @@ class Player(pygame.sprite.Sprite):
         else:
             screen.blit(self.image, self.rect)
 
-    def update(self, doors, collision_rects, tile_map):
-        self.player_controls(doors, collision_rects, tile_map)
+    def update(self, doors, collision_rects, tile_map, events):
+        # Check if the player is near a computer
+        near_computer = self.check_computer_collision(tile_map.computer)
+
+        self.player_controls(doors, collision_rects, tile_map, near_computer, events)
 
         # If a door collision happens, change room
         new_room = self.check_door(doors)

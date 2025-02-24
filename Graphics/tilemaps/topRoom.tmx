@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="50" height="53" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="49">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="50" height="53" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="50">
  <tileset firstgid="1" source="../tilesets/mainRoom/tileset.tsx"/>
  <tileset firstgid="2561" source="../tilesets/mainRoom/decorative.tsx"/>
  <tileset firstgid="2817" source="../tilesets/mainRoom/tilesStuff.tsx"/>
@@ -155,10 +155,13 @@
   <object id="45" x="522.909" y="474.909" width="74.7273" height="41.4545"/>
   <object id="46" x="427.091" y="427.273" width="73.8182" height="41.0909"/>
   <object id="47" x="459.273" y="283.091" width="73.4545" height="73.8182"/>
-  <object id="48" x="209" y="691.333" width="46.3333" height="13.6667"/>
+  <object id="48" x="209" y="691.333" width="46.3333" height="10"/>
  </objectgroup>
  <objectgroup id="6" name="Door" visible="0">
   <object id="10" x="400.245" y="800.361" width="15.6576" height="15.8275"/>
+ </objectgroup>
+ <objectgroup id="7" name="Computer">
+  <object id="49" x="208.333" y="701.667" width="47" height="11.6667"/>
  </objectgroup>
  <layer id="4" name="Roof" width="50" height="53">
   <data encoding="csv">
