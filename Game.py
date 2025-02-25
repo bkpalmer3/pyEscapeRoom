@@ -22,7 +22,7 @@ pygame.display.set_caption("Tile Map Game")
 
 # Game settings
 ZOOM = 2
-SPEED = 2
+SPEED = 3
 
 pygame.mixer.init()
 # Load the music file

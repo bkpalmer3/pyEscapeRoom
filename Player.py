@@ -24,7 +24,7 @@ class Player(pygame.sprite.Sprite):
         self.state = "idle"  # Track whether the player is idle or moving
         self.window_open = False # Used to track if a window is open and if you can move
 
-        self.animation_delay = 100
+        self.animation_delay = 50
         self.last_update_time = pygame.time.get_ticks()
 
         self._extract_frames()
