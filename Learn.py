@@ -47,6 +47,7 @@ m_speed = 3
 
 #Creating the background
 background_surf = pygame.Surface((800,400))
+
 # key_pressed = False
 
 
