@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "C:/Users/bkpal/OneDrive/Desktop/Programming/Python/pyEscapeRoom/Graphics/tilemaps/leftRoom.tmx",
+    "activeFile": "C:/Users/Peter/Desktop/pyEscapeRoom/Graphics/tilemaps/mainRoom.tmx",
     "expandedProjectPaths": [
         "."
     ],
@@ -18,6 +18,63 @@
             "scaleInDock": 1,
             "scaleInEditor": 8
         },
+        "C:/Users/Peter/Desktop/pyEscapeRoom/Graphics/tilemaps/binRoomState13.tmx": {
+            "expandedObjectLayers": [
+                5,
+                7,
+                6
+            ],
+            "scale": 5.5,
+            "selectedLayer": 7,
+            "viewCenter": {
+                "x": 191.54545454545456,
+                "y": 256.45454545454544
+            }
+        },
+        "C:/Users/Peter/Desktop/pyEscapeRoom/Graphics/tilemaps/binRoomState859.tmx": {
+            "expandedObjectLayers": [
+                12,
+                5,
+                9,
+                17,
+                8,
+                6
+            ],
+            "scale": 5.5,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 201.72727272727275,
+                "y": 240.0909090909091
+            }
+        },
+        "C:/Users/Peter/Desktop/pyEscapeRoom/Graphics/tilemaps/binRoomState94.tmx": {
+            "expandedObjectLayers": [
+                12,
+                5,
+                9,
+                17,
+                8,
+                6
+            ],
+            "scale": 4,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 203.125,
+                "y": 240.125
+            }
+        },
+        "C:/Users/Peter/Desktop/pyEscapeRoom/Graphics/tilemaps/binRoomStateStart.tmx": {
+            "expandedObjectLayers": [
+                5,
+                7
+            ],
+            "scale": 4,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 196.375,
+                "y": 251.125
+            }
+        },
         "C:/Users/Peter/Desktop/pyEscapeRoom/Graphics/tilemaps/bottomRoom.tmx": {
             "expandedObjectLayers": [
                 5,
@@ -26,47 +83,55 @@
             "scale": 2,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 214,
+                "x": 238.75,
                 "y": 228.25
             }
         },
         "C:/Users/Peter/Desktop/pyEscapeRoom/Graphics/tilemaps/leftRoom.tmx": {
             "expandedObjectLayers": [
                 5,
-                6
+                6,
+                13
             ],
-            "scale": 2,
-            "selectedLayer": 2,
+            "scale": 3,
+            "selectedLayer": 3,
             "viewCenter": {
-                "x": 263.5,
-                "y": 242.25
+                "x": 245.5,
+                "y": 281.16666666666663
             }
         },
         "C:/Users/Peter/Desktop/pyEscapeRoom/Graphics/tilemaps/mainRoom.tmx": {
             "expandedObjectLayers": [
-                5,
-                9,
-                7,
-                8,
-                6
+                10
             ],
-            "scale": 4,
+            "scale": 1.5,
             "selectedLayer": 7,
             "viewCenter": {
-                "x": 168,
-                "y": 123.625
+                "x": 201,
+                "y": 181.66666666666663
             }
         },
         "C:/Users/Peter/Desktop/pyEscapeRoom/Graphics/tilemaps/rightRoom.tmx": {
             "expandedObjectLayers": [
+                12,
+                11,
                 5,
-                6
+                10,
+                9,
+                17,
+                7,
+                8,
+                6,
+                16,
+                15,
+                14,
+                13
             ],
-            "scale": 3,
+            "scale": 1.5,
             "selectedLayer": 14,
             "viewCenter": {
-                "x": 200.33333333333334,
-                "y": 326.5
+                "x": 233,
+                "y": 247.66666666666663
             }
         },
         "C:/Users/Peter/Desktop/pyEscapeRoom/Graphics/tilemaps/tileset.tsx": {
@@ -75,156 +140,15 @@
         "C:/Users/Peter/Desktop/pyEscapeRoom/Graphics/tilemaps/topRoom.tmx": {
             "expandedObjectLayers": [
                 5,
-                6
-            ],
-            "scale": 3,
-            "selectedLayer": 2,
-            "viewCenter": {
-                "x": 212.33333333333334,
-                "y": 672.5
-            }
-        },
-        "C:/Users/bkpal/OneDrive/Desktop/Programming/Python/pyEscapeRoom/Graphics/tilemaps/binRoomState1.tmx": {
-            "expandedObjectLayers": [
-                11,
-                14,
-                9,
-                15,
-                16,
-                10,
-                17,
                 7,
-                12,
-                13,
-                8,
-                5
-            ],
-            "scale": 2,
-            "selectedLayer": 2,
-            "viewCenter": {
-                "x": 148.25,
-                "y": 160.75
-            }
-        },
-        "C:/Users/bkpal/OneDrive/Desktop/Programming/Python/pyEscapeRoom/Graphics/tilemaps/binRoomState1266.tmx": {
-            "scale": 2,
-            "selectedLayer": 15,
-            "viewCenter": {
-                "x": 215.75,
-                "y": 162.75
-            }
-        },
-        "C:/Users/bkpal/OneDrive/Desktop/Programming/Python/pyEscapeRoom/Graphics/tilemaps/binRoomState13.tmx": {
-            "expandedObjectLayers": [
-                5,
-                17,
                 6
-            ],
-            "scale": 8,
-            "selectedLayer": 2,
-            "viewCenter": {
-                "x": 46.1875,
-                "y": 271.4375
-            }
-        },
-        "C:/Users/bkpal/OneDrive/Desktop/Programming/Python/pyEscapeRoom/Graphics/tilemaps/binRoomState859.tmx": {
-            "expandedObjectLayers": [
-                5
-            ],
-            "scale": 8,
-            "selectedLayer": 2,
-            "viewCenter": {
-                "x": 67.0625,
-                "y": 271.5625
-            }
-        },
-        "C:/Users/bkpal/OneDrive/Desktop/Programming/Python/pyEscapeRoom/Graphics/tilemaps/binRoomState883.tmx": {
-            "scale": 1.4566666666666668,
-            "selectedLayer": 0,
-            "viewCenter": {
-                "x": 215.90389016018307,
-                "y": 239.93135011441643
-            }
-        },
-        "C:/Users/bkpal/OneDrive/Desktop/Programming/Python/pyEscapeRoom/Graphics/tilemaps/binRoomState94.tmx": {
-            "expandedObjectLayers": [
-                5
-            ],
-            "scale": 5.5,
-            "selectedLayer": 2,
-            "viewCenter": {
-                "x": 74.63636363636365,
-                "y": 263.54545454545456
-            }
-        },
-        "C:/Users/bkpal/OneDrive/Desktop/Programming/Python/pyEscapeRoom/Graphics/tilemaps/binRoomStateStart.tmx": {
-            "expandedObjectLayers": [
-                5
-            ],
-            "scale": 5.5,
-            "selectedLayer": 2,
-            "viewCenter": {
-                "x": 61.54545454545456,
-                "y": 249.1818181818182
-            }
-        },
-        "C:/Users/bkpal/OneDrive/Desktop/Programming/Python/pyEscapeRoom/Graphics/tilemaps/bottomRoom.tmx": {
-            "scale": 1.6862499999999998,
-            "selectedLayer": 0,
-            "viewCenter": {
-                "x": 197.18309859154934,
-                "y": 244.03261675315053
-            }
-        },
-        "C:/Users/bkpal/OneDrive/Desktop/Programming/Python/pyEscapeRoom/Graphics/tilemaps/leftRoom.tmx": {
-            "expandedObjectLayers": [
-                5,
-                7,
-                11,
-                9,
-                10,
-                8
             ],
             "scale": 4,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 261.375,
-                "y": 136.375
+                "x": 111.875,
+                "y": 654.375
             }
-        },
-        "C:/Users/bkpal/OneDrive/Desktop/Programming/Python/pyEscapeRoom/Graphics/tilemaps/mainRoom.tmx": {
-            "expandedObjectLayers": [
-                5
-            ],
-            "scale": 3,
-            "selectedLayer": 2,
-            "viewCenter": {
-                "x": 130.5,
-                "y": 257.5
-            }
-        },
-        "C:/Users/bkpal/OneDrive/Desktop/Programming/Python/pyEscapeRoom/Graphics/tilemaps/rightRoom.tmx": {
-            "scale": 1.6862499999999998,
-            "selectedLayer": 0,
-            "viewCenter": {
-                "x": 216.16011860637514,
-                "y": 239.88139362490736
-            }
-        },
-        "C:/Users/bkpal/OneDrive/Desktop/Programming/Python/pyEscapeRoom/Graphics/tilemaps/topRoom.tmx": {
-            "expandedObjectLayers": [
-                5
-            ],
-            "scale": 1.5,
-            "selectedLayer": 2,
-            "viewCenter": {
-                "x": 448.99999999999994,
-                "y": 557
-            }
-        },
-        "decorative.tsx": {
-            "scaleInDock": 2,
-            "scaleInEditor": 1
         },
         "mainRoom.tmx": {
             "scale": 2.112053571428571,
@@ -234,12 +158,8 @@
                 "y": 183.94419784400762
             }
         },
-        "tilesStuff.tsx": {
-            "scaleInDock": 3,
-            "scaleInEditor": 1
-        },
         "tileset.tsx": {
-            "scaleInDock": 3,
+            "scaleInDock": 2,
             "scaleInEditor": 1
         }
     },
@@ -251,28 +171,24 @@
     "map.tileWidth": 16,
     "map.width": 27,
     "openFiles": [
-        "C:/Users/bkpal/OneDrive/Desktop/Programming/Python/pyEscapeRoom/Graphics/tilemaps/leftRoom.tmx",
-        "C:/Users/bkpal/OneDrive/Desktop/Programming/Python/pyEscapeRoom/Graphics/tilemaps/topRoom.tmx",
-        "C:/Users/bkpal/OneDrive/Desktop/Programming/Python/pyEscapeRoom/Graphics/tilemaps/binRoomStateStart.tmx",
-        "C:/Users/bkpal/OneDrive/Desktop/Programming/Python/pyEscapeRoom/Graphics/tilemaps/binRoomState13.tmx",
-        "C:/Users/bkpal/OneDrive/Desktop/Programming/Python/pyEscapeRoom/Graphics/tilemaps/binRoomState94.tmx",
-        "C:/Users/bkpal/OneDrive/Desktop/Programming/Python/pyEscapeRoom/Graphics/tilemaps/binRoomState859.tmx",
-        "C:/Users/bkpal/OneDrive/Desktop/Programming/Python/pyEscapeRoom/Graphics/tilemaps/mainRoom.tmx"
+        "tileset.tsx",
+        "C:/Users/Peter/Desktop/pyEscapeRoom/Graphics/tilemaps/mainRoom.tmx",
+        "C:/Users/Peter/Desktop/pyEscapeRoom/Graphics/tilemaps/leftRoom.tmx",
+        "C:/Users/Peter/Desktop/pyEscapeRoom/Graphics/tilemaps/rightRoom.tmx",
+        "C:/Users/Peter/Desktop/pyEscapeRoom/Graphics/tilemaps/topRoom.tmx",
+        "C:/Users/Peter/Desktop/pyEscapeRoom/Graphics/tilemaps/bottomRoom.tmx"
     ],
     "project": "mainRoom.tiled-project",
     "recentFiles": [
-        "C:/Users/bkpal/OneDrive/Desktop/Programming/Python/pyEscapeRoom/Graphics/tilemaps/mainRoom.tmx",
-        "C:/Users/bkpal/OneDrive/Desktop/Programming/Python/pyEscapeRoom/Graphics/tilemaps/binRoomState859.tmx",
-        "C:/Users/bkpal/OneDrive/Desktop/Programming/Python/pyEscapeRoom/Graphics/tilemaps/binRoomState94.tmx",
-        "C:/Users/bkpal/OneDrive/Desktop/Programming/Python/pyEscapeRoom/Graphics/tilemaps/binRoomState13.tmx",
-        "C:/Users/bkpal/OneDrive/Desktop/Programming/Python/pyEscapeRoom/Graphics/tilemaps/binRoomStateStart.tmx",
-        "C:/Users/bkpal/OneDrive/Desktop/Programming/Python/pyEscapeRoom/Graphics/tilemaps/topRoom.tmx",
-        "C:/Users/bkpal/OneDrive/Desktop/Programming/Python/pyEscapeRoom/Graphics/tilemaps/leftRoom.tmx",
-        "tilesStuff.tsx",
+        "C:/Users/Peter/Desktop/characterCrap/Walk_Down.tsx",
+        "C:/Users/Peter/Desktop/pyEscapeRoom/Graphics/tilemaps/Walk_Down.tsx",
         "tileset.tsx",
-        "decorative.tsx",
-        "C:/Users/bkpal/OneDrive/Desktop/Programming/Python/pyEscapeRoom/Graphics/tilemaps/bottomRoom.tmx",
-        "C:/Users/bkpal/OneDrive/Desktop/Programming/Python/pyEscapeRoom/Graphics/tilemaps/binRoomState1.tmx"
+        "C:/Users/Peter/Desktop/pyEscapeRoom/Graphics/tilemaps/bottomRoom.tmx",
+        "C:/Users/Peter/Desktop/pyEscapeRoom/Graphics/tilemaps/topRoom.tmx",
+        "C:/Users/Peter/Desktop/pyEscapeRoom/Graphics/tilemaps/rightRoom.tmx",
+        "C:/Users/Peter/Desktop/pyEscapeRoom/Graphics/tilemaps/leftRoom.tmx",
+        "C:/Users/Peter/Desktop/pyEscapeRoom/Graphics/tilemaps/mainRoom.tmx",
+        "mainRoom.tmx"
     ],
     "tileset.lastUsedFormat": "tsx",
     "tileset.margin": 0,

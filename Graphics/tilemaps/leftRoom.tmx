@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="27" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="13" nextobjectid="66">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="27" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="14" nextobjectid="76">
  <tileset firstgid="1" source="../tilesets/mainRoom/tileset.tsx"/>
  <tileset firstgid="2561" source="../tilesets/mainRoom/tilesStuff.tsx"/>
  <tileset firstgid="3153" source="../tilesets/mainRoom/decorative.tsx"/>
@@ -85,7 +85,7 @@
   <object id="19" x="118.6" y="244.59" width="35.0277" height="18.6086"/>
   <object id="24" x="182.373" y="292.696" width="35.0277" height="18.6086"/>
   <object id="26" x="310.373" y="293.696" width="35.0277" height="18.1086"/>
-  <object id="32" x="182.873" y="388.196" width="35.0277" height="19.6086"/>
+  <object id="32" x="182.123" y="388.196" width="35.0277" height="19.6086"/>
   <object id="43" x="117.986" y="149.446" width="35.0277" height="17.1086"/>
   <object id="44" x="245.486" y="149.946" width="35.0277" height="17.1086"/>
   <object id="45" x="181.963" y="197.143" width="35.0277" height="17.1086"/>
@@ -93,28 +93,34 @@
   <object id="47" x="245.736" y="197.749" width="35.0277" height="17.1086"/>
   <object id="48" x="310.736" y="197.749" width="35.0277" height="17.1086"/>
   <object id="49" x="182.963" y="245.143" width="35.0277" height="17.1086"/>
-  <object id="50" x="119.236" y="245.249" width="35.0277" height="17.1086"/>
   <object id="51" x="246.736" y="245.749" width="35.0277" height="17.1086"/>
-  <object id="52" x="311.736" y="245.749" width="35.0277" height="17.1086"/>
+  <object id="52" x="309.986" y="245.249" width="35.0277" height="17.1086"/>
   <object id="53" x="181.963" y="293.643" width="35.0277" height="17.1086"/>
   <object id="54" x="118.236" y="293.749" width="35.0277" height="17.1086"/>
   <object id="55" x="245.736" y="294.249" width="35.0277" height="17.1086"/>
-  <object id="56" x="310.736" y="294.249" width="35.0277" height="17.1086"/>
   <object id="57" x="181.963" y="340.643" width="35.0277" height="17.1086"/>
   <object id="58" x="118.236" y="340.749" width="35.0277" height="17.1086"/>
   <object id="59" x="245.736" y="341.249" width="35.0277" height="17.1086"/>
   <object id="60" x="310.736" y="341.249" width="35.0277" height="17.1086"/>
-  <object id="61" x="181.963" y="389.643" width="35.0277" height="17.1086"/>
   <object id="62" x="118.236" y="389.749" width="35.0277" height="17.1086"/>
   <object id="63" x="245.736" y="390.249" width="35.0277" height="17.1086"/>
-  <object id="64" x="310.736" y="390.249" width="35.0277" height="17.1086"/>
+  <object id="64" x="309.736" y="388.249" width="35.0277" height="17.1086"/>
+  <object id="66" x="208.667" y="99.3333" width="46.3333" height="10.3333"/>
  </objectgroup>
- <objectgroup id="7" name="index 21"/>
- <objectgroup id="8" name="index 15"/>
- <objectgroup id="9" name="index 13"/>
- <objectgroup id="10" name="index 8"/>
- <objectgroup id="11" name="index 3">
-  <object id="42" x="310.486" y="149.946" width="35.0277" height="17.1086"/>
+ <objectgroup id="13" name="Computer">
+  <object id="67" x="208.333" y="110" width="46.3333" height="15.3333"/>
+ </objectgroup>
+ <objectgroup id="7" name="index-1" visible="0">
+  <object id="68" x="117.5" y="244.75" width="35.25" height="32.5"/>
+ </objectgroup>
+ <objectgroup id="8" name="index-2" visible="0">
+  <object id="69" x="181.25" y="292.25" width="35.5" height="32"/>
+ </objectgroup>
+ <objectgroup id="9" name="index-3" visible="0">
+  <object id="71" x="181.5" y="389" width="35" height="35.25"/>
+ </objectgroup>
+ <objectgroup id="10" name="index-4" visible="0">
+  <object id="73" x="309.75" y="292.5" width="35" height="33.25"/>
  </objectgroup>
  <objectgroup id="6" name="Door">
   <object id="9" x="385.26" y="256.95" width="14.6777" height="14.3021"/>

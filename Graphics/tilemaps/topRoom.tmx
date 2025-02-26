@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="50" height="53" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="58">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="50" height="53" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="59">
  <tileset firstgid="1" source="../tilesets/mainRoom/tileset.tsx"/>
  <tileset firstgid="2561" source="../tilesets/mainRoom/decorative.tsx"/>
  <tileset firstgid="2817" source="../tilesets/mainRoom/tilesStuff.tsx"/>
@@ -159,6 +159,7 @@
   <object id="55" x="486.17" y="291.956" width="67.7272" height="15.5474"/>
   <object id="56" x="501.824" y="484.595" width="164.227" height="39.9877"/>
   <object id="57" x="565.93" y="564.033" width="20.0313" height="43.7775"/>
+  <object id="58" x="128" y="674.5" width="46.75" height="11.75"/>
  </objectgroup>
  <objectgroup id="6" name="Door">
   <object id="10" x="400.245" y="800.361" width="15.6576" height="15.8275"/>

@@ -62,7 +62,7 @@ class Player(pygame.sprite.Sprite):
         """Link the player to the camera."""
         self.camera = camera
 
-    def player_controls(self, doors, collision_rects, tile_map, near_computer, events, near_button):
+    def player_controls(self, doors, collision_rects, tile_map, near_computer, events, near_button, near_index):
         keys = pygame.key.get_pressed()
         previous_action = self.current_action
         self.state = "idle"  # Default to idle unless movement is detected
@@ -121,9 +121,37 @@ class Player(pygame.sprite.Sprite):
                 tile_map.computer_display_active = not tile_map.computer_display_active
                 self.window_open = not self.window_open
             if event.type == pygame.KEYDOWN and event.key == pygame.K_e and near_button:
-                tile_map.buttons_pushed += str(near_button - 1)
-                tile_map.window_text = ["Buttons Pushed:", tile_map.buttons_pushed]
-
+                # tile_map.buttons_pushed += str(near_button - 1)
+                if tile_map.current_room == "right-start":
+                    tile_map.change_room(6, self)
+                elif tile_map.current_room == "right-1":
+                    if near_button - 1 == 1:
+                        tile_map.change_room(7, self)
+                elif tile_map.current_room == "right-2":
+                    if near_button - 1 == 3:
+                        tile_map.change_room(8, self)
+                elif tile_map.current_room == "right-3":
+                    if near_button - 1 == 2:
+                        tile_map.binary_complete = True
+                        print("binary complete")
+                        tile_map.change_room(5, self)
+                        
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_e and near_index:
+                if near_index == 1:
+                    tile_map.index_1_complete = True
+                    print("Number 1")
+                elif near_index == 2:
+                    tile_map.index_2_complete = True
+                    print("Number 2")
+                elif near_index == 3:
+                    tile_map.index_3_complete = True
+                    print("Number 3")
+                elif near_index == 4:
+                    tile_map.index_4_complete = True
+                    print("Number 4")
+                if tile_map.index_1_complete and tile_map.index_2_complete and tile_map.index_3_complete and tile_map.index_4_complete:
+                    tile_map.index = True
+                    print("Complete!")
 
     def check_collision(self, collision_rects):
         for rect in collision_rects:
@@ -141,6 +169,15 @@ class Player(pygame.sprite.Sprite):
         button_num = 0
         if buttons:
             for button in buttons:
+                button_num += 1
+                if button and self.rect.colliderect(button):
+                    return button_num
+        return 0
+    
+    def check_index_collision(self, index_puzzle):
+        button_num = 0
+        if index_puzzle:
+            for button in index_puzzle:
                 button_num += 1
                 if button and self.rect.colliderect(button):
                     return button_num
@@ -166,8 +203,9 @@ class Player(pygame.sprite.Sprite):
         # Check if the player is near a computer
         near_computer = self.check_computer_collision(tile_map.computer)
         near_button = self.check_button_collision(tile_map.buttons)
+        near_index = self.check_index_collision(tile_map.index_puzzle)
 
-        self.player_controls(doors, collision_rects, tile_map, near_computer, events, near_button)
+        self.player_controls(doors, collision_rects, tile_map, near_computer, events, near_button, near_index)
 
         # If a door collision happens, change room
         new_room = self.check_door(doors)
